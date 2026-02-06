@@ -1,1 +1,1 @@
-## React Readme
+## A Smart Results Analysis System for Strategic Revision Session for HND students Called “EduRev Insight Platform (ERIP)” A smart analytics platform
