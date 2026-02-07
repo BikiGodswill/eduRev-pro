@@ -5,6 +5,7 @@ import RiskLevel from "../../ui/RiskLevel";
 import { FaBrain, FaCircle, FaSafari } from "react-icons/fa6";
 import ChartCart from "../../ui/ChartCart";
 import ChartLayout from "../../ui/ChartLayout";
+import RiskLayout from "../../ui/RiskLayout";
 
 export default function AdminDashboard() {
   const dashboards = [
@@ -61,6 +62,7 @@ export default function AdminDashboard() {
         </section>
         <section className="">
           <ChartLayout />
+          <RiskLayout />
         </section>
       </main>
     </>
