@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #fcfdfe;
+  --color-primary-dark: #e9e9e9;
+  --color-secondary-300: #264673;
+  --color-secondary-500: #213e65;
+  --color-secondary: #1d3658;
+  --color-accent: #0fae89;
+
+  --default-transition-duration: 400ms;
+  --default-transition-timing-function: ease-in-out;
+}
+
+@layer {
+  aside a.active {
+    @apply bg-accent/80;
+  }
+}

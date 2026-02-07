@@ -1,29 +1,26 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import Authentication from "./pages/Authentication";
 import PageNotFound from "./pages/PageNotFound";
-import AdminDashboard from "./features/admin/AdminDashboard";
-import TeacherDashboard from "./features/teacher/TeacherDashboard";
-import StudentDashboard from "./features/students/StudentDashboard";
+import StudentRoutes from "./routes/StudentRoutes";
+import TeacherRoutes from "./routes/TeacherRoutes";
+import AdminRoutes from "./routes/AdminRoutes";
 
-export default function App() {
+function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Authentication />} />
-        <Route path="/admin">
-          <Route index element={<AdminDashboard />} />
-        </Route>
-        <Route path="/teacher">
-          <Route index element={<TeacherDashboard />} />
-        </Route>
 
-        <Route path="/student">
-          <Route index element={<StudentDashboard />} />
-        </Route>
+        <Route path="/student/*" element={<StudentRoutes />} />
+        <Route path="/teacher/*" element={<TeacherRoutes />} />
+        <Route path="/admin/*" element={<AdminRoutes />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
 }
+
+export default App;

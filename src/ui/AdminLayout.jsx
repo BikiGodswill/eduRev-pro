@@ -1,10 +1,9 @@
-import React from "react";
+import SideBar from "./SideBar.jsx";
+import NavBar from "./NavBar.jsx";
+import MainContainer from "./MainContainer.jsx";
 import { Outlet } from "react-router-dom";
-import SideBar from "../../ui/SideBar.jsx";
-import NavBar from "../../ui/NavBar.jsx";
-import MainContainer from "../../ui/MainContainer.jsx";
 
-export default function StudentDashboard() {
+export default function StudentLayout() {
   return (
     <div className="bg-primary grid h-dvh grid-cols-[15rem_1fr] grid-rows-[auto_1fr]">
       <SideBar />
