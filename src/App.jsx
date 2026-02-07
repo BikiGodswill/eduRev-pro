@@ -7,7 +7,7 @@ import StudentRoutes from "./routes/StudentRoutes";
 import TeacherRoutes from "./routes/TeacherRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
