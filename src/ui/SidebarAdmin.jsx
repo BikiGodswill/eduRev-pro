@@ -30,7 +30,7 @@ export default function SidebarAdmin() {
         </NavLink>
         <NavLink
           className="text-primary/80 hover:bg-secondary-500 hover:text-primary flex items-center gap-2 rounded-xl p-2 transition"
-          to="/admin/students"
+          to="/admin/teachers"
         >
           <FaPeopleLine /> Teachers
         </NavLink>
@@ -43,7 +43,7 @@ export default function SidebarAdmin() {
         </NavLink>
         <NavLink
           className="text-primary/80 hover:bg-secondary-500 hover:text-primary flex items-center gap-2 rounded-xl p-2 transition"
-          to="/admin/settings"
+          to="/admin/reports"
         >
           <LuMic className="" /> reports
         </NavLink>

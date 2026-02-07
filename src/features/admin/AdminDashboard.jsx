@@ -3,6 +3,8 @@ import DashboardCard from "../../ui/DashboardCard";
 import { HiBookOpen, HiUser } from "react-icons/hi2";
 import RiskLevel from "../../ui/RiskLevel";
 import { FaBrain, FaCircle, FaSafari } from "react-icons/fa6";
+import ChartCart from "../../ui/ChartCart";
+import ChartLayout from "../../ui/ChartLayout";
 
 export default function AdminDashboard() {
   const dashboards = [
@@ -36,15 +38,31 @@ export default function AdminDashboard() {
     },
   ];
   return (
-    <main className="flex justify-between">
-      {dashboards.map((dashboard) => (
-        <DashboardCard
-          title={dashboard.title}
-          total={dashboard.total}
-          description={dashboard.description}
-          icon={dashboard.icon}
-        />
-      ))}
-    </main>
+    <>
+      <header className="mb-10">
+        <h1 className="mb-2 text-3xl font-bold text-gray-900">
+          Academic Dashboard
+        </h1>
+        <p className="text-gray-600">
+          Visualize performance data with interactive charts
+        </p>
+      </header>
+      <main>
+        <section className="flex justify-between">
+          {dashboards.map((dashboard) => (
+            <DashboardCard
+              title={dashboard.title}
+              total={dashboard.total}
+              description={dashboard.description}
+              icon={dashboard.icon}
+              key={dashboard.id}
+            />
+          ))}
+        </section>
+        <section className="">
+          <ChartLayout />
+        </section>
+      </main>
+    </>
   );
 }
