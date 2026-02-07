@@ -5,13 +5,5 @@ import NavBar from "../../ui/NavBar.jsx";
 import MainContainer from "../../ui/MainContainer.jsx";
 
 export default function StudentDashboard() {
-  return (
-    <div className="bg-primary grid h-dvh grid-cols-[15rem_1fr] grid-rows-[auto_1fr]">
-      <SideBar />
-      <NavBar />
-      <MainContainer>
-        <Outlet />
-      </MainContainer>
-    </div>
-  );
+  return <p>Dashboard</p>;
 }

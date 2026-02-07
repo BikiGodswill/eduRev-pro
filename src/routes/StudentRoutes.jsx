@@ -9,7 +9,7 @@ import StudentSettings from "../features/students/StudentSettings";
 export default function StudentRoutes() {
   return (
     <Routes>
-      <Route element={<StudentDashboard />}>
+      <Route element={<StudentLayout />}>
         <Route index element={<StudentDashboard />} />
         <Route path="dashboard" element={<StudentDashboard />} />
         <Route path="performance" element={<StudentPerformance />} />
