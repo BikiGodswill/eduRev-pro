@@ -61,8 +61,8 @@ export default function RiskDistributionChart() {
       <Doughnut data={data} options={options} />
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-3xl font-bold text-gray-900">{total}%</div>
-          <div className="text-sm text-gray-500">Total Distribution</div>
+          <h4 className="text-3xl font-bold text-gray-900 align-middle">{total}%</h4>
+          <p className="text-sm text-gray-500">Total Distribution</p>
         </div>
       </div>
     </div>
