@@ -24,6 +24,7 @@ export default function StudentPerfomanceChart() {
     labels: ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr"],
     datasets: [
       {
+        label: "Performance",
         data: [88, 85, 87, 82, 90, 88, 91, 93],
         borderColor: "#38bdf8",
         backgroundColor: (context) => {
