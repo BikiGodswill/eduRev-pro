@@ -1,6 +1,6 @@
 import React from "react";
-import Form from "../ui/Form";
 import Heading from "../ui/Heading";
+import Form from "../ui/Form";
 
 export default function Authentication() {
   return (
