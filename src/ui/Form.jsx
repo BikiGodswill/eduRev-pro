@@ -23,7 +23,7 @@ export default function Form() {
     email: "",
     matricule: "",
   });
-  const navigate =useNavigate()
+  const navigate = useNavigate();
   const signupLabels = [
     {
       id: 1,
@@ -92,9 +92,9 @@ export default function Form() {
   }
   return (
     <>
-      <div className="bg-primary flex w-full max-w-lg justify-around font-bold text-gray-900">
+      <div className="bg-primary flex w-full max-w-lg justify-around gap-2 rounded-t-2xl p-2 font-bold text-gray-900">
         <button
-          className="bg-primary-dark mx-1 my-2 w-[50%] rounded-lg px-4 py-2"
+          className={`my-2 w-[50%] rounded-lg px-4 py-2 ${!isSignup ? "bg-accent/80 text-primary" : "bg-primary-dark"}`}
           onClick={() => {
             setIsSignup(false);
           }}
@@ -102,7 +102,7 @@ export default function Form() {
           Login
         </button>
         <button
-          className="bg-accent my-2 w-[50%] rounded-lg px-4 py-2"
+          className={`my-2 w-[50%] rounded-lg px-4 py-2 ${isSignup ? "bg-accent/80 text-primary" : "bg-primary-dark"}`}
           onClick={() => {
             setIsSignup(true);
           }}
@@ -111,7 +111,7 @@ export default function Form() {
         </button>
       </div>
       <form
-        className="bg-primary flex w-full max-w-lg flex-col items-center gap-4 p-6 shadow-lg"
+        className="bg-primary flex w-full max-w-lg flex-col items-center gap-2 rounded-b-2xl p-6 shadow-lg"
         onSubmit={handleSubmit}
       >
         {isSignup &&
