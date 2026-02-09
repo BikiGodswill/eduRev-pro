@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import FormField from "./FormField";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export default function Form() {
   //   const URLsignup = curl --location 'localhost:3000/api/v1/users/signup' \
@@ -21,6 +23,7 @@ export default function Form() {
     email: "",
     matricule: "",
   });
+  const navigate =useNavigate()
   const signupLabels = [
     {
       id: 1,
@@ -58,12 +61,11 @@ export default function Form() {
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
-  async function handleSubmit(e) {
+  const BASE_URL = "https://edurev-pro.onrender.com/api/v1/users";
+  async function handleSubmit(formData, e) {
     e.preventDefault();
     try {
-      const url = isSignup
-        ? "localhost:3000/api/v1/users/signup"
-        : "localhost:3000/api/v1/users/login";
+      const url = isSignup ? `${BASE_URL}/signup` : `${BASE_URL}/login`;
 
       const res = await fetch(url, {
         method: "POST",
@@ -77,14 +79,11 @@ export default function Form() {
       if (!res.ok) {
         throw new Error(data.message || "Request failed");
       }
-      // Save token if login
       if (data.token) {
         localStorage.setItem("token", data.token);
       }
 
       toast.success(isSignup ? "Signup successful " : "Login successful ");
-
-      // Redirect after success
       navigate("/student");
     } catch (error) {
       console.error(error);
@@ -111,7 +110,10 @@ export default function Form() {
           Signup
         </button>
       </div>
-      <form className="bg-primary flex w-full max-w-lg flex-col items-center gap-4 p-6 shadow-lg" onSubmit={handleSubmit}>
+      <form
+        className="bg-primary flex w-full max-w-lg flex-col items-center gap-4 p-6 shadow-lg"
+        onSubmit={handleSubmit}
+      >
         {isSignup &&
           signupLabels.map((label) => (
             <FormField
