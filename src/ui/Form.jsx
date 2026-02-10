@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import FormField from "./FormField";
-import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {
   //   const URLsignup = curl --location 'localhost:3000/api/v1/users/signup' \
@@ -23,7 +22,7 @@ export default function Form() {
     email: "",
     matricule: "",
   });
-  const navigate =useNavigate()
+  const navigate = useNavigate();
   const signupLabels = [
     {
       id: 1,
@@ -122,7 +121,6 @@ export default function Form() {
               placeholder={label.placeholder}
               onChange={handleChange}
               key={label.id}
-              name={label.name}
             />
           ))}
         {!isSignup &&
@@ -133,7 +131,6 @@ export default function Form() {
               placeholder={label.placeholder}
               key={label.id}
               onChange={handleChange}
-              name={label.name}
             />
           ))}
         <button
