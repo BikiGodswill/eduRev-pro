@@ -5,16 +5,12 @@ import NavBar from "../../ui/NavBar.jsx";
 import MainContainer from "../../ui/MainContainer.jsx";
 import StudentStats from "../../ui/StudentStats.jsx";
 import StudentPerfomanceChart from "../../ui/StudentPerfomanceChart.jsx";
+import Title from "../../ui/Title.jsx";
 
 export default function StudentDashboard() {
   return (
     <section>
-      <div className="mb-2">
-        <h2 className="text-2xl font-bold">Welcome, Royal Tk</h2>
-        <p className="text-stone-600">
-          Track your performance and AI-powered recommendations
-        </p>
-      </div>
+      <Title />
       <StudentStats />
       <StudentPerfomanceChart />
     </section>
