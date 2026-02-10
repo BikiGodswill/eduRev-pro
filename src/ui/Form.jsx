@@ -1,99 +1,106 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormField from "./FormField";
+import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export default function Form() {
-  //   const URLsignup = curl --location 'localhost:3000/api/v1/users/signup' \
-  // --data-raw '{
-  //     "name":"Marinus",
-  //     "email":"user2@gmail.com",
-  //     "matricule":"LMUI2023ENG12"
-  // }'
-
-  // const URLlogin  curl --location 'localhost:3000/api/v1/users/login' \
-  // --data-raw '{
-  //     "email":"user@gmail.com",
-  //     "matricule":"LMUI-24SWE285"
-  // }'
   const [isSignup, setIsSignup] = useState(true);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     matricule: "",
   });
-  const navigate = useNavigate();
+  const navigate =useNavigate()
   const signupLabels = [
     {
       id: 1,
-      name: "Matricule",
+      name: "matricule",
       type: "text",
       placeholder: "e.g LMU24SWE286",
     },
     {
       id: 2,
-      name: "FullName",
+      name: "fullName",
       type: "text",
-      placeholder: "e.g Royal Damilola Biki",
+      placeholder: "e.g Tabe Clinton",
     },
     {
       id: 3,
-      name: "Email",
+      name: "email",
       type: "email",
-      placeholder: "e.g dami@gmail.com",
+      placeholder: "e.g tabeclinton@gmail.com",
     },
   ];
   const loginLabels = [
     {
       id: 1,
-      name: "Matricule",
+      name: "matricule",
       type: "text",
       placeholder: "e.g LMU24SWE286",
     },
     {
       id: 2,
-      name: "Email",
+      name: "email",
       type: "email",
-      placeholder: "e.g dami@gmail.com",
+      placeholder: "e.g tabeclinton@gmail.com",
     },
   ];
-  function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
-  const BASE_URL = "https://edurev-pro.onrender.com/api/v1/users";
-  async function handleSubmit(formData, e) {
-    e.preventDefault();
-    try {
-      const url = isSignup ? `${BASE_URL}/signup` : `${BASE_URL}/login`;
 
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
+  function validate() {
+    const newErrors = {};
 
-      if (!res.ok) {
-        throw new Error(data.message || "Request failed");
-      }
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-      }
-
-      toast.success(isSignup ? "Signup successful " : "Login successful ");
-      navigate("/student");
-    } catch (error) {
-      console.error(error);
-      toast.error(error.message || "Something went wrong");
+    if (!formData.matricule.trim()) {
+      newErrors.matricule = "Matricule is required";
     }
+
+    if (isSignup && !formData.fullName.trim()) {
+      newErrors.fullName = "Full name is required";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    }
+
+    setErrors(newErrors);
+
+    console.log(errors);
+
+    return Object.keys(newErrors).length === 0;
   }
+
+  function handleChange(e) {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+
+    setErrors({
+      ...errors,
+      [e.target.name]: "",
+    });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!validate()) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    authenticate(formData, isSignup);
+  }
+
+  useEffect(() => {
+    setErrors({});
+  }, [isSignup]);
+
   return (
     <>
-      <div className="bg-primary flex w-full max-w-lg justify-around font-bold text-gray-900">
+      <div className="bg-primary flex w-full max-w-lg justify-around gap-2 rounded-t-2xl p-2 font-bold text-gray-900">
         <button
-          className="bg-primary-dark mx-1 my-2 w-[50%] rounded-lg px-4 py-2"
+          type="button"
+          className={`my-2 w-[50%] rounded-lg px-4 py-2 ${!isSignup ? "bg-accent/80 text-primary" : "bg-primary-dark"}`}
           onClick={() => {
             setIsSignup(false);
           }}
@@ -101,7 +108,8 @@ export default function Form() {
           Login
         </button>
         <button
-          className="bg-accent my-2 w-[50%] rounded-lg px-4 py-2"
+          type="button"
+          className={`my-2 w-[50%] rounded-lg px-4 py-2 ${isSignup ? "bg-accent/80 text-primary" : "bg-primary-dark"}`}
           onClick={() => {
             setIsSignup(true);
           }}
@@ -110,34 +118,37 @@ export default function Form() {
         </button>
       </div>
       <form
-        className="bg-primary flex w-full max-w-lg flex-col items-center gap-4 p-6 shadow-lg"
+        className="bg-primary flex w-full max-w-lg flex-col items-center gap-2 rounded-b-2xl p-6 shadow-lg"
         onSubmit={handleSubmit}
       >
         {isSignup &&
           signupLabels.map((label) => (
             <FormField
-              label={label.name}
+              label={capitalizeFirstLetter(label.name)}
               type={label.type}
               placeholder={label.placeholder}
               onChange={handleChange}
               key={label.id}
+              name={label.name}
             />
           ))}
         {!isSignup &&
           loginLabels.map((label) => (
             <FormField
-              label={label.name}
+              label={capitalizeFirstLetter(label.name)}
               type={label.type}
               placeholder={label.placeholder}
               key={label.id}
               onChange={handleChange}
+              name={label.name}
             />
           ))}
         <button
           type="submit"
-          className="bg-accent mt-2 w-full rounded-md p-2 font-bold text-gray-900"
+          disabled={loadingState}
+          className={`bg-accent text-primary mt-2 w-full rounded-md p-2 py-3 font-bold ${loadingState ? "cursor-not-allowed opacity-50" : ""}`}
         >
-          {isSignup ? "Sign Up" : "Log In"}
+          {loadingState ? "Please wait..." : isSignup ? "Sign Up" : "Log In"}
         </button>
       </form>
     </>
