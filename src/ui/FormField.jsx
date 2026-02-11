@@ -1,11 +1,10 @@
-import React from "react";
-
 export default function FormField({
   label,
   type,
   placeholder,
   onChange,
   name,
+  value,
   error,
 }) {
   return (
@@ -15,6 +14,7 @@ export default function FormField({
         name={name}
         type={type}
         placeholder={placeholder}
+        value={value}
         className="bg-primary-dark my-4 rounded-md px-2 py-2 outline-0"
         onChange={onChange}
       />

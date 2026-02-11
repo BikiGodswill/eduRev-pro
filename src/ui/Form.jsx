@@ -11,13 +11,13 @@ function capitalizeFirstLetter(string) {
 export default function Form() {
   const [isSignup, setIsSignup] = useState(true);
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     matricule: "",
   });
   const [errors, setErrors] = useState({});
 
-  const { authenticate, loadingState } = useAuth();
+  const { authenticate, loading: loadingState } = useAuth();
 
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export default function Form() {
     },
     {
       id: 2,
-      name: "fullName",
+      name: "name",
       type: "text",
       placeholder: "e.g Tabe Clinton",
     },
@@ -63,8 +63,8 @@ export default function Form() {
       newErrors.matricule = "Matricule is required";
     }
 
-    if (isSignup && !formData.fullName.trim()) {
-      newErrors.fullName = "Full name is required";
+    if (isSignup && !formData.name.trim()) {
+      newErrors.name = "Full name is required";
     }
 
     if (!formData.email.trim()) {
@@ -101,8 +101,15 @@ export default function Form() {
   }
 
   useEffect(() => {
+    setFormData({
+      name: "",
+      email: "",
+      matricule: "",
+    });
     setErrors({});
   }, [isSignup]);
+
+  console.log(formData);
 
   return (
     <>
@@ -139,6 +146,7 @@ export default function Form() {
               onChange={handleChange}
               key={label.id}
               name={label.name}
+              value={formData[label.name]}
               error={errors[label.name]}
             />
           ))}
@@ -148,9 +156,10 @@ export default function Form() {
               label={capitalizeFirstLetter(label.name)}
               type={label.type}
               placeholder={label.placeholder}
-              key={label.id}
               onChange={handleChange}
+              key={label.id}
               name={label.name}
+              value={formData[label.name]}
               error={errors[label.name]}
             />
           ))}
