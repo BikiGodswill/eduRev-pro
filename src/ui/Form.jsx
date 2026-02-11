@@ -109,8 +109,6 @@ export default function Form() {
     setErrors({});
   }, [isSignup]);
 
-  console.log(formData);
-
   return (
     <>
       <div className="bg-primary flex w-full max-w-lg justify-around gap-2 rounded-t-2xl p-2 font-bold text-gray-900">
