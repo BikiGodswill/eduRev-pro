@@ -10,31 +10,31 @@ export default function AdminDashboard() {
   const dashboards = [
     {
       id: 1,
-      title: "total students",
+      title: "Total students",
       description: "12% from last semester",
       total: 8,
-      icon: <HiUser size={40} />,
+      icon: <HiUser size={35} />,
     },
     {
       id: 2,
       title: "Active courses",
       description: "2 new this term",
       total: 6,
-      icon: <HiBookOpen size={40} color="#16a249fb" />,
+      icon: <HiBookOpen size={35} color="#16a249fb" />,
     },
     {
       id: 3,
       title: "All Recomendtions",
       description: "7 total generated",
       total: 6,
-      icon: <FaBrain size={40} color="#2baeea" />,
+      icon: <FaBrain size={35} color="#2baeea" />,
     },
     {
       id: 4,
       title: "Active effectiveness",
       description: "Recommendation impact",
       total: "83%",
-      icon: <FaSafari size={40} color="#16a249" />,
+      icon: <FaSafari size={35} color="#16a249" />,
     },
   ];
   return (

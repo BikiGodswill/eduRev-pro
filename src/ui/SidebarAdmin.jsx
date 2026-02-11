@@ -11,7 +11,7 @@ export default function SidebarAdmin() {
       <nav className="mt-12 flex flex-col gap-2">
         <NavLink
           className="text-primary/80 hover:bg-secondary-500 hover:text-primary flex items-center gap-2 rounded-xl p-2 transition"
-          to="/admin"
+          to="/admin/dashboard"
         >
           <LuLayoutDashboard /> My Dashboard
         </NavLink>
@@ -45,7 +45,7 @@ export default function SidebarAdmin() {
           className="text-primary/80 hover:bg-secondary-500 hover:text-primary flex items-center gap-2 rounded-xl p-2 transition"
           to="/admin/reports"
         >
-          <LuMic className="" /> reports
+          <LuMic className="" /> Reports
         </NavLink>
       </nav>
     </aside>
