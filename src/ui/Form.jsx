@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import FormField from "./FormField";
 import { useNavigate } from "react-router";
-import { useAuth } from "../hooks/useAuth";
+import { useLogin, useSignup } from "../auth/auth.mutations";
 import toast from "react-hot-toast";
+import { redirectByRole } from "../services/redirectByRole";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -17,9 +18,12 @@ export default function Form() {
   });
   const [errors, setErrors] = useState({});
 
-  const { authenticate, loading: loadingState } = useAuth();
-
   const navigate = useNavigate();
+
+  const loginMutation = useLogin();
+  const signupMutation = useSignup();
+
+  const isLoading = loginMutation.isLoading || signupMutation.isLoading;
 
   const signupLabels = [
     {
@@ -90,14 +94,39 @@ export default function Form() {
     });
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
+
     if (!validate()) {
       toast.error("Please fill in all required fields");
       return;
     }
 
-    authenticate(formData, isSignup);
+    if (isSignup) {
+      signupMutation.mutate(formData, {
+        onSuccess: () => {
+          toast.success("Signup successful, you can now log in");
+          setIsSignup(false);
+        },
+        onError: (err) => toast.error(err.message),
+      });
+    } else {
+      loginMutation.mutate(
+        {
+          email: formData.email,
+          matricule: formData.matricule,
+        },
+        {
+          onSuccess: (data) => {
+            const user = data.data.user;
+
+            toast.success("Login successful");
+            redirectByRole(user.role, navigate);
+          },
+          onError: (err) => toast.error(err.message),
+        },
+      );
+    }
   }
 
   useEffect(() => {
@@ -163,10 +192,10 @@ export default function Form() {
           ))}
         <button
           type="submit"
-          disabled={loadingState}
-          className={`bg-accent text-primary mt-2 w-full rounded-md p-2 py-3 font-bold ${loadingState ? "cursor-not-allowed opacity-50" : ""}`}
+          disabled={isLoading}
+          className={`bg-accent text-primary mt-2 w-full rounded-md p-2 py-3 font-bold ${isLoading ? "cursor-not-allowed opacity-50" : ""}`}
         >
-          {loadingState ? "Please wait..." : isSignup ? "Sign Up" : "Log In"}
+          {isLoading ? "Please wait..." : isSignup ? "Sign Up" : "Log In"}
         </button>
       </form>
     </>
