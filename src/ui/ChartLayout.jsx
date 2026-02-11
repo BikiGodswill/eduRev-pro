@@ -16,14 +16,14 @@ export default function ChartLayout() {
 
   // Course Performance Data
   const courseData = {
-    title: "Course Performance",
+    title: "Lecturer Performance",
     labels: [
-      "Machine Learning",
-      "Data Structures",
-      "Statistics",
-      "Linear Algebra",
-      "Algorithms",
-      "Databases",
+      "Algorithm and Data Structure",
+      "Database Developement and Administration",
+      "Web Design",
+      "NetWorking",
+      "Programming",
+      "Operating system",
     ],
     data: [85, 78, 92, 88, 81, 95],
     type: "bar",

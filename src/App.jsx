@@ -6,19 +6,23 @@ import PageNotFound from "./pages/PageNotFound";
 import StudentRoutes from "./routes/StudentRoutes";
 import TeacherRoutes from "./routes/TeacherRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Authentication />} />
+    <>
+      <Toaster position="top-center" />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Authentication />} />
 
-        <Route path="/student/*" element={<StudentRoutes />} />
-        <Route path="/teacher/*" element={<TeacherRoutes />} />
-        <Route path="/admin/*" element={<AdminRoutes />} />
+          <Route path="/student/*" element={<StudentRoutes />} />
+          <Route path="/teacher/*" element={<TeacherRoutes />} />
+          <Route path="/admin/*" element={<AdminRoutes />} />
 
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
