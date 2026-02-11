@@ -11,7 +11,7 @@ export default function FormField({
     <div className="flex w-110 flex-col">
       <label className="font-bold text-gray-600">{label}</label>
       <input
-        name={name}
+        name={name.toLowerCase()}
         type={type}
         placeholder={placeholder}
         value={value}
