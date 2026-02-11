@@ -3,6 +3,11 @@ import FormField from "./FormField";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { useAuth } from "../hooks/useAuth";
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 export default function Form() {
   const [isSignup, setIsSignup] = useState(true);
